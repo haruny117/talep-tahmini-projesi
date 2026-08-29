@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(page_title="Talep Tahmini & Stok Optimizasyonu", layout="wide")
 
@@ -9,8 +11,8 @@ st.caption("Rossmann Store Sales verisi üzerinde XGBoost tabanlı talep tahmini
 
 @st.cache_data
 def load_data():
-    predictions = pd.read_csv("test_predictions.csv", parse_dates=["Date"])
-    stock_plan = pd.read_csv("stock_plan.csv")
+    predictions = pd.read_csv(os.path.join(BASE_DIR, "test_predictions.csv"), parse_dates=["Date"])
+    stock_plan = pd.read_csv(os.path.join(BASE_DIR, "stock_plan.csv"))
     return predictions, stock_plan
 
 predictions, stock_plan = load_data()
